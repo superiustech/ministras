@@ -25,8 +25,8 @@
 <div class="side-content">
     <p class="side-bold">Administração do Painel</p>
     <a href="<?php echo INCLUDE_PATH ?>painel/cadastro-usuario" class="side-text">Cadastrar Usuário</a>
-    <a href="#" class="side-text">Editar Usuário</a>
-    <a href="#" class="side-text">Cadastrar Usuário</a>
+    <a href="<?php echo INCLUDE_PATH ?>painel/editar-usuario" class="side-text">Editar Usuário</a>
+
 </div>
 </div><!-- sidebar -->
 
