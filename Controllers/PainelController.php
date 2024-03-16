@@ -16,6 +16,37 @@
                 $this->view->render(array('titulo' =>'Painel'));
             });
 
+            \Router::rota('painel/editar-usuario', function(){
+
+                if(isset($_POST['tipo_acao']) && $_POST['tipo_acao'] == 'editar-usuario'){
+                    $apelido = $_POST['nome_apelido'];
+                    $senha = $_POST['senha_usuario'];
+
+                    if($senha == '' || $apelido == ''){
+                        $data['sucesso'] = false;
+                        $data['mensagens'] = 'Campos vazios não são permitidos.';
+                    }else if(!(\Models\PainelModel::verificaUsuario($apelido))){
+                        $data['sucesso'] = false;
+                        $data['mensagens'] = 'Usuário não existente!';
+                    }else{
+
+                        if(\Models\PainelModel::editarUsuario($apelido,$senha)){
+                            $data['sucesso'] = true;
+                            $data['mensagens'] = 'Senha alterada com sucesso!';
+                        }else{
+                            $data['sucesso'] = false;
+                            $data['mensagens'] = 'Erro esporádico.';
+                        }
+                    }
+                die(json_encode($data));
+                    
+                }
+
+                $this->view = new \Views\MainView('painel-editar-usuario' ,'header-painel');
+                $this->view->render(array('titulo' =>'Editar Usuario'));
+            });
+
+
             \Router::rota('painel/cadastro-usuario', function(){           
                 // CADASTRAR USUÁRIO ADMINISTRADOR ->>>>> 
                 if(isset($_POST['tipo_acao']) && $_POST['tipo_acao'] == 'cadastrar-cliente'){

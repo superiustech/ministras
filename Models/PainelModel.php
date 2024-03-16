@@ -32,6 +32,13 @@ Class PainelModel{
 		else
 			return false;
 	}
+	public static function editarUsuario($apelido,$senha){
+		$sql = PainelModel::conectar()->prepare("UPDATE USUARIO SET sDsSenha = ? where sNmUsuario = ?");
+		if($sql->execute(array($senha,$apelido)))
+			return true;
+		else
+			return false;
+	}
 	public static function verificaUsuario($apelido){
 		$sql = PainelModel::conectar()->prepare("SELECT sNmUsuario FROM USUARIO WHERE sNmUsuario = ?");
 		$sql->execute(array($apelido));
