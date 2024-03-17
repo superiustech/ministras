@@ -7,7 +7,7 @@
     <script src="https://kit.fontawesome.com/41651576e2.js" crossorigin="anonymous"></script>   
     <script src="<?php echo INCLUDE_PATH ?>js/jquery-3.7.1.min.js"></script>
     <script src="<?php echo INCLUDE_PATH ?>js/painel.js"></script>
-    <title></title>
+    <title><?php echo $arr['titulo'];?></title>
 </head>
 <body>
 
