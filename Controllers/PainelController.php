@@ -12,6 +12,9 @@
 
             if(isset($_SESSION['logado'])){
             \Router::rota('painel/', function(){
+                
+               
+
                 $this->view = new \Views\MainView('painel-home' ,'header-painel');
                 $this->view->render(array('titulo' =>'Painel'));
             });
@@ -76,7 +79,7 @@
                 // ROTACIONA PARA A TELA ESPECÍFICA:
 
                 $this->view = new \Views\MainView('cadastro-usuario' ,'header-painel');
-                $this->view->render(array('titulo' =>'Cadastro usuário'));
+                $this->view->render(array('titulo' =>'Cadastro usuário  '));
             });
             }else{
                 // direcionar para tela de login

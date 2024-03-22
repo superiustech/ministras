@@ -62,10 +62,57 @@ Class PainelModel{
 		$sql->execute(array($apelido));
 		return $sql->fetchAll();
 	}
-
-
+	public static function mostrarVisitas(){
+		$sql = PainelModel::conectar()->prepare("SELECT * FROM USUARIOS_VISITAS");
+		$sql->execute();
+		return $sql->fetchAll();
+	}
+	public static function mostrarVisitasHoje(){
+		$dataAgora = date('Y-m-d');
+		$dataInicio = $dataAgora . ' 00:00:00';
+		$dataFim = $dataAgora . ' 23:59:59';
 	
+		$sql = PainelModel::conectar()->prepare("SELECT * FROM USUARIOS_VISITAS WHERE tDtLogin BETWEEN ? AND ?");
+		$sql->execute(array($dataInicio, $dataFim));
+		return $sql->fetchAll();
+	}
 	
+	public static function listarUsuariosOnline(){
+		$sql = PainelModel::conectar()->prepare("SELECT * FROM USUARIOS_ONLINE");
+		$sql->execute();
+		return $sql->fetchAll();
+	}
+	
+	public static function updateUsuarioOnline(){
+        if(isset($_SESSION['online'])){
+            $token = $_SESSION['online'];
+            $verificarToken = PainelModel::conectar()->prepare("SELECT nCdUsuario FROM USUARIOS_ONLINE WHERE sDsToken = ?");
+            $verificarToken->execute(array($_SESSION['online']));
+
+            if($verificarToken->rowCount() == 1){
+                $sql = PainelModel::conectar()->prepare("UPDATE USUARIOS_ONLINE SET tDtUltimaAcao = ? WHERE sDsToken = ?");
+                $sql->execute(array(HORARIO_ATUAL, $token));
+            }else{
+                $token = $_SESSION['online'];
+                $sql = PainelModel::conectar()->prepare("INSERT INTO USUARIOS_ONLINE VALUES (null,?,?,?)");
+                $sql->execute(array(IP_ADDR,$token,HORARIO_ATUAL));
+            }   
+        }
+        else{
+            $_SESSION['online'] = uniqid();
+            $token = $_SESSION['online'];
+            $sql = PainelModel::conectar()->prepare("INSERT INTO USUARIOS_ONLINE VALUES (null,?,?,?)");
+            $sql->execute(array(IP_ADDR,$token,HORARIO_ATUAL));
+        }
+    }
+
+        public static function contadorVisitas(){
+            if(!isset($_COOKIE['visita'])){
+                setcookie('visita',true,time() + (60*60*24*7));
+                $sql = PainelModel::conectar()->prepare("INSERT INTO USUARIOS_VISITAS VALUES (null, ?,?)");
+                $sql->execute(array(IP_ADDR, HORARIO_ATUAL));
+            }
+        }
 }
 
 ?>

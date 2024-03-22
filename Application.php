@@ -1,7 +1,9 @@
 <?php 
     define('INCLUDE_PATH_FULL' , 'http://localhost/ministras/Views/pages/');
-    define('INCLUDE_PATH' , 'http://localhost/ministras/');
-
+    define('INCLUDE_PATH' , 'http://localhost/ministras/');        
+    define('HORARIO_ATUAL', date('Y-m-d H:i:s'));
+    define('IP_ADDR', $_SERVER['REMOTE_ADDR']);
+    define('DATA_ATUAL', date('Y-m-d'));
     session_start();
     
 setlocale( LC_ALL, 'pt_BR', 'pt_BR.iso-8859-1', 'pt_BR.utf-8', 'portuguese' );

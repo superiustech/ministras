@@ -448,3 +448,31 @@ margin: 30px 0 10px;
 }
 
 }
+
+/* DASHBOARD */
+
+.boxItem{
+  padding: 30px;
+  font-size: 20px;
+  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+  color: white;
+  box-shadow: 13px 8px 43px -39px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 13px 8px 43px -39px rgba(0,0,0,0.75);
+  -moz-box-shadow: 13px 8px 43px -39px rgba(0,0,0,0.75);  
+
+
+}
+
+.onlineUsuario{background-color: rgb(239, 179, 66);}
+.totalVisitas{background-color: #146EBE;}
+.visitasHoje{background-color: rgb(55, 211, 55);}
+
+.center{
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+}
